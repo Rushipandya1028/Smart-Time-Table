@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Current Lectures</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+   <style>
+    
+/* Sidebar styling */
+*{
+    margin: 0px;
+    padding: 0px;
+}
+.sidebar {
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #375E97;
+    padding-top: 20px;
+    color: white;
+    font-size: 18px;
+    overflow-y: auto; /* Enable scrolling if content overflows */
+}
+
+/* Sidebar links */
+.sidebar a {
+   
+    display: block;
+    padding: 20px;
+    text-decoration: none;
+    color: #fff;
+    font-size: 25px;
+    transition: background-color 0.3s;
+}
+.div{
+    margin-top: 25px;
+}
+
+/* Change color on hover */
+.sidebar a:hover {
+    background-color: #263859;
+}
+
+/* Main content */
+.content {
+    margin-left: 250px;
+    padding: 20px;
+    background-image: linear-gradient(296deg, rgba(37,37,37,0.2) 0%,transparent 15%),linear-gradient(353deg, rgba(37,37,37,0.2) 0%,transparent 29%),linear-gradient(62deg, rgba(37,37,37,0.2) 0%,transparent 24%),linear-gradient(194deg, rgba(37,37,37,0.2) 0%,transparent 42%),linear-gradient(270deg, rgba(60,60,60,0.95) 0%,transparent 1%),linear-gradient(90deg, rgba(56,56,56,0.95) 0%,transparent 1%),repeating-linear-gradient(220deg, rgba(140,140,140,0.1) 0px,transparent 4px),repeating-linear-gradient(298deg, rgba(140,140,140,0.1) 0px,transparent 4px),repeating-linear-gradient(312deg, rgba(140,140,140,0.1) 0px,transparent 4px),linear-gradient(90deg, rgb(241,190,105),rgb(241,190,105));
+    min-height: calc(100vh - 20px);
+}
+.content2{
+    margin-left: 30px;
+    margin-top: 100px;
+}
+
+/* Lecture info styling */
+.lecture-info {
+    margin-bottom: 20px;
+}
+
+.lecture-info h2 {
+    margin-bottom: 10px;
+    color: #375E97;
+}
+
+.lecture-info p {
+    margin: 0;
+    color: #333;
+}
+
+.logo {
+    background-color: black;
+    height: 130px;
+    width: 250px;
+    margin-left: 0px;
+    margin-top: -20px;
+   
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo img {
+    width: 250px;
+    height: 130px;
+    
+}
+
+/* Form styling */
+form {
+    margin-top: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+select, button {
+    padding: 10px;
+    margin-right: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+button {
+    background-color: #FFBB00;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #FFA500;
+}
+
+#day{
+    height: 40px;
+    width: 100px;
+    background-color: rgb(255, 255, 255);
+}
+
+   </style>
+</head>
+<body>
+  <!-- Sidebar -->
+<div class="main">
+    <div class="sidebar">
+        <div class="logo">
+            <img src="https://collegekampus.com/wp-content/uploads/2020/02/Logo-karnawati.png" alt="Logo">
+        </div>
+     <div class="div">
+        <a href="/templates/dashboard.html">Dashboard</a>
+        <a href="/particular_classes.html">Particular Classes</a>
+        <a href="/faculty">Faculty</a>
+        {% if current_user.is_authenticated %}
+        <a href="/logout">Logout</a>
+        {% endif %}
+     </div>
+    </div>
+    
+    <!-- Main content -->
+    <div  id="content5" class="content">
+        <div class="content2">
+            <h1>Smart Time Table</h1>
+    
+        <div class="lecture-info">
+            <h2>Selected Lecture</h2>
+            {% if selected_lecture %}
+                <p><strong>Day:</strong> {{ selected_lecture.Day }} - <strong>Time:</strong> {{ selected_lecture.StartTime }} - <strong>Lecture:</strong> {{ selected_lecture.Lecture }}
+                {% if selected_lecture.Class %}
+                    - <strong>Class:</strong> {{ selected_lecture.Class }} (IT IS PRESENT)
+                {% endif %}
+                </p>
+            {% else %}
+                <p>No lecture selected.</p>
+            {% endif %}
+        </div>
+    
+        <div class="lecture-info">
+            <h2>Current Lectures</h2>
+            {% if current_lectures %}
+                <ul>
+                    {% for lecture in current_lectures %}
+                        <li>
+                            <strong>Day:</strong> {{ lecture.Day }} - 
+                            <strong>Time:</strong> {{ lecture.StartTime }} - 
+                            <strong>Lecture:</strong> {{ lecture.Lecture }}
+                            {% if lecture.Class %}
+                                - <strong>Class:</strong> {{ lecture.Class }} (IT IS PRESENT)
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No lectures currently ongoing.</p>
+            {% endif %}
+        </div>
+    
+        <div class="lecture-info">
+            <h2>Lectures with Same Time Slot</h2>
+            {% if same_time_lectures %}
+                <ul>
+                    {% for lecture in same_time_lectures %}
+                        <li>
+                            <strong>Day:</strong> {{ lecture.Day }} - 
+                            <strong>Time:</strong> {{ lecture.StartTime }} - 
+                            <strong>Lecture:</strong> {{ lecture.Lecture }}
+                            {% if lecture.Class %}
+                                - <strong>Class:</strong> {{ lecture.Class }} (IT IS PRESENT)
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No lectures with the same day and time as the selected lecture.</p>
+            {% endif %}
+        </div>
+    
+       <!---- <h2>All Lectures</h2>
+        <ul>
+            {% for data in all_data %}
+                <li>
+                    <strong>Day:</strong> {{ data.Day }} -
+                    <strong>Time:</strong> {{ data.StartTime }} -
+                    <strong>Lecture:</strong> {{ data.Lecture }}
+                    {% if data.Class %}
+                        - <strong>Class:</strong> {{ data.Class }} (IT IS PRESENT)
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+     -->
+        <form action="/" method="post">
+            <label for="day">Select Day:</label>
+            <select name="day" id="day">
+                {% for day in unique_days %}
+                    <option value="{{ day }}">{{ day }}</option>
+                {% endfor %}
+            </select>
+    
+            <label for="time">Select Time:</label>
+            <select name="time" id="time">
+                {% for time in unique_times %}
+                    <option value="{{ time }}">{{ time }}</option>
+                {% endfor %}
+            </select>
+    
+            <button type="submit">Get Lecture</button>
+        </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

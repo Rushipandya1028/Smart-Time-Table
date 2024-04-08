@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>particular_classes</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    
+   <style>
+    
+/* Sidebar styling */
+*{
+    margin: 0px;
+    padding: 0px;
+}
+.sidebar {
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #375E97;
+    padding-top: 20px;
+    color: white;
+    font-size: 18px;
+    overflow-y: auto; /* Enable scrolling if content overflows */
+}
+
+/* Sidebar links */
+.sidebar a {
+   
+    display: block;
+    padding: 20px;
+    text-decoration: none;
+    color: #fff;
+    font-size: 25px;
+    transition: background-color 0.3s;
+}
+.div{
+    margin-top: 25px;
+}
+
+/* Change color on hover */
+.sidebar a:hover {
+    background-color: #263859;
+}
+
+.active{
+    background-color:#263859 ;
+}
+
+/* Main content */
+.content {
+    margin-left: 250px;
+    padding: 20px;
+   background-color:#d1c090;
+    min-height: calc(100vh - 20px);
+    min-height: 917px;
+    /*background-image: linear-gradient(406deg, rgba(110,106,106, 0.2) 0%,transparent 15%),linear-gradient(463deg, rgba(110,106,106, 0.2) 0%,transparent 29%),linear-gradient(172deg, rgba(110,106,106, 0.2) 0%,transparent 24%),linear-gradient(304deg, rgba(110,106,106, 0.2) 0%,transparent 42%),linear-gradient(380deg, rgba(207,175,175, 0.95) 0%,transparent 1%),linear-gradient(200deg, rgba(255,255,255, 0.95) 0%,transparent 1%),repeating-linear-gradient(330deg, rgba(129,91,91, 0.1) 0px,transparent 4px),repeating-linear-gradient(408deg, rgba(129,91,91, 0.1) 0px,transparent 4px),repeating-linear-gradient(422deg, rgba(129,91,91, 0.1) 0px,transparent 4px),linear-gradient(200deg, rgb(254,249,185),rgb(254,249,185));    min-height: calc(100vh - 20px);*/
+}
+.content2{
+    margin-left: 30px;
+    margin-top:60px
+}
+
+/* Lecture info styling */
+.lecture-info {
+    margin-bottom: 20px;
+}
+
+.lecture-info h2 {
+    margin-bottom: 10px;
+    color: #375E97;
+}
+
+.lecture-info p {
+    margin: 0;
+    color: #333;
+}
+
+.logo {
+    background-color: black;
+    height: 130px;
+    width: 250px;
+    margin-left: 0px;
+    margin-top: -20px;
+   
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo img {
+    width: 250px;
+    height: 130px;
+    
+}
+
+/* Form styling */
+form {
+    margin-top: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+select, button {
+    padding: 10px;
+    margin-right: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+button {
+    background-color: #FFBB00;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    
+}
+
+button:hover {
+    background-color:#375E97;
+    border: 1px black solid;
+}
+
+#day{
+    height: 40px;
+    width: 100px;
+    background-color: rgb(255, 255, 255);
+}
+.select{
+    font-size: 45px;
+    margin-top: 20px;
+    color:#375E97;
+    margin-left: -250px;
+}
+
+.header{
+    background-color: #375E97;
+    
+    width: 100%;
+    height: 130px;
+    margin-left: -50px;
+    position: fixed;
+    margin-top: -80px;
+
+    
+}
+.head{
+    font-size: 55px;
+    margin-top: 10px;
+    padding: 20px;
+    font-family: sans-serif;
+    color: white;
+  
+    position: fixed;
+}
+.loginname{
+    font-size: 25px;
+    color: #333;
+    margin-left: 1300px;
+    margin-top: 40px;
+    background-color: #d1a734;
+margin-right: 20px;
+    border-radius: 30px;
+    padding: 10px;
+    display: flex;
+    gap: 10px;
+    font-family: sans-serif;
+    position: fixed;
+    
+}
+.icon{
+    background-color: #375E97;
+    height: 40px;
+    width: 40px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 30px;
+    font-size: 25px;
+    
+}
+.icon1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.button-container{
+    margin-top: 10px;
+    margin-left: -250px;
+}
+tr:nth-child(odd) {
+  background-color: #ffffcc; /* Light yellow */
+}
+
+/* Even row color */
+tr:nth-child(even) {
+  background-color: #ffffe6; /* Lighter yellow */
+}
+tbody tr:hover {
+  background-color: #e9e9e9;
+}
+  </style>
+</head>
+<body>
+  <!-- Sidebar -->
+<div class="main">
+    <div class="sidebar">
+        <div class="logo">
+            <img src="https://collegekampus.com/wp-content/uploads/2020/02/Logo-karnawati.png" alt="Logo">
+        </div>
+     <div class="div">
+        <a href="/">Dashboard</a>
+        <a href="/particular_classes" class="active">Particular Classes</a>
+        <a href="/faculty">Faculty</a>
+        {% if current_user.is_authenticated %}
+        <a href="/logout">Logout</a>
+        {% endif %}
+     </div>
+    </div>
+    <div class="content">
+     <div class="content2">
+        <div class="header"> 
+            <h1 class="head">Smart Time Table (UIT) </h1>
+            <div class="loginname"> 
+                {% if current_user.is_authenticated %} 
+                <div class="icon">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+                <div class="icon1">
+                    <p>Hi, {{ current_user.username }}</p> 
+                 
+                 {% else %} 
+                <a href="/login">Login</a> 
+                  {% endif %} 
+                </div>
+            </div>
+        </div>
+
+        <h2 class="sel">Select</h2>
+        <div class="content">
+            <h1 class="select">Select a Class</h1>
+            <div class="button-container">
+                <button onclick="location.href='/cse_lectures'" type="button">CSE SEM-6</button>
+                <button onclick="location.href='/Aiml6_lectures'" type="button">AIML SEM-6</button>
+                <button onclick="location.href='/bsc6_lectures'" type="button">Bsc SEM-6</button>
+                <button onclick="location.href='/cse4_lectures'" type="button">CSE SEM-4</button>
+                <button onclick="location.href='/cse4_lectures'" type="button">AIML SEM-4</button>
+                <button onclick="location.href='/cse4_lectures'" type="button">Bsc SEM-4</button>
+                <button onclick="location.href='/cse4_lectures'" type="button">AIML SEM-2</button>
+                <button onclick="location.href='/cse4_lectures'" type="button">AIML SEM-2</button>
+                <button onclick="location.href='/cse4_lectures'" type="button">Bsc SEM-2</button>
+            </div>
+        </div>
+     </div>
+    </div>    
+    
+       
+    
+    
+   
+</body>
+</html>
+
+</body>
+</html>

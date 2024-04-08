@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture Information</title>
+</head>
+<body>
+    <h1>Lecture Information</h1>
+    {% if lecture_info %}
+        <p>Day: {{ lecture_info.Day }}</p>
+        <p>Start Time: {{ lecture_info.StartTime }}</p>
+        <p>End Time: {{ lecture_info.EndTime }}</p>
+        <p>Lecture: {{ lecture_info.Lecture }}</p>
+        <!-- Add more details as needed -->
+    {% else %}
+        <p>No lecture information found for the selected criteria.</p>
+    {% endif %}
+</body>
+</html>
